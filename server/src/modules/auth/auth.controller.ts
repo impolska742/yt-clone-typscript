@@ -21,32 +21,33 @@ export async function loginHandler(
     // 4. Add a cookie to the response
     // 5. Respond
 
-    try {
-        const user = await findUserByEmail(email)
+    // find the user by email
+    const user = await findUserByEmail(email)
 
-        if (!user || !user.comparePassword(password)) {
+    if (!user) {
+        return res
+            .status(StatusCodes.UNAUTHORIZED)
+            .send('Invalid email or password')
+    } else {
+        const checkPasswordsMatch = await user.comparePassword(password)
+        if (!checkPasswordsMatch)
             return res
                 .status(StatusCodes.UNAUTHORIZED)
-                .send('Invalid email or password.')
-        }
-
-        const payload = omit(user.toJSON(), ['password'])
-
-        const jwt = signJWT(payload)
-
-        res.cookie('accessToken', jwt, {
-            maxAge: 3.154e10, // 1 Year
-            httpOnly: true,
-            domain: domain,
-            path: '/',
-            sameSite: 'strict',
-            secure: false,
-        })
-
-        return res.status(StatusCodes.OK).send(jwt)
-    } catch (e: any) {
-        return res
-            .status(StatusCodes.INTERNAL_SERVER_ERROR)
-            .send(e.message ? e.message : 'An error occurred while logging in.')
+                .send('Invalid email or password')
     }
+
+    const payload = omit(user.toJSON(), ['password'])
+
+    const jwt = signJWT(payload)
+
+    res.cookie('accessToken', jwt, {
+        maxAge: 3.154e10, // 1 year
+        httpOnly: true,
+        domain: 'localhost',
+        path: '/',
+        sameSite: 'strict',
+        secure: false,
+    })
+
+    return res.status(StatusCodes.OK).send(jwt)
 }
