@@ -1,23 +1,43 @@
 import express from "express";
-
-const app = express();
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import helmet from "helmet";
+import { connectDatabase, disconnectDatabase } from "./utils/database";
+import logger from "./utils/logger";
+import { CORS_ORIGIN } from "./constants";
 
 const PORT = process.env.PORT || 4000;
 
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+const app = express();
+
+// Middlewares
+app.use(cookieParser());
+app.use(express.json());
+app.use(
+  cors({
+    origin: CORS_ORIGIN,
+    credentials: true,
+  })
+);
+app.use(helmet());
+
+// Server connection
+const server = app.listen(PORT, async () => {
+  await connectDatabase();
+  logger.info(`Server is running on http://localhost:${PORT}`);
 });
 
 const signals = ["SIGTERM", "SIGINT"];
 
-const gracefulShutDown = (signal: string) => {
+const gracefulShutDown = async (signal: string) => {
   process.on(signal, async () => {
-    console.log("Goodbye, got signal :", signal);
-
+    logger.info("Goodbye, got signal :", signal);
     server.close();
 
     // disconnect from the db
-    console.log("My work here is done.");
+    await disconnectDatabase();
+
+    logger.info("My work here is done.");
 
     process.exit(0);
   });
