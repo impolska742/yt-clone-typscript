@@ -2,6 +2,7 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import helmet from 'helmet'
+import * as dotenv from 'dotenv'
 import { connectDatabase, disconnectDatabase } from './utils/database'
 import logger from './utils/logger'
 import { CORS_ORIGIN } from './constants'
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 4000
 const app = express()
 
 // Middlewares
+dotenv.config()
 app.use(cookieParser())
 app.use(express.json())
 app.use(
