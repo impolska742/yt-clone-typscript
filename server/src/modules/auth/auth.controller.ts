@@ -5,7 +5,7 @@ import { findUserByEmail } from '../user/user.service'
 import { LoginBody } from './auth.schema'
 import { signJWT } from './auth.utils'
 
-const domain = process.env.domain || 'localhost'
+const DOMAIN = process.env.DOMAIN || 'localhost'
 
 export async function loginHandler(
     req: Request<{}, {}, LoginBody>,
@@ -43,7 +43,7 @@ export async function loginHandler(
     res.cookie('accessToken', jwt, {
         maxAge: 3.154e10, // 1 year
         httpOnly: true,
-        domain: domain,
+        domain: DOMAIN,
         path: '/',
         sameSite: 'strict',
         secure: false,

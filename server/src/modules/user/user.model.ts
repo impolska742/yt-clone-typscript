@@ -32,7 +32,6 @@ export class User {
     }
 }
 
-// Export user model with schemaoptions timestamps as true
 export const UserModel = getModelForClass(User, {
     schemaOptions: { timestamps: true },
 })
