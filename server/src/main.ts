@@ -9,6 +9,7 @@ import { CORS_ORIGIN } from './constants'
 
 import userRoute from './modules/user/user.route'
 import authRoute from './modules/auth/auth.route'
+import deserializeUser from './middlewares/deserializeUser'
 
 const PORT = process.env.PORT || 4000
 
@@ -25,6 +26,7 @@ app.use(
     }),
 )
 app.use(helmet())
+app.use(deserializeUser)
 
 // Routes
 app.use('/api/users', userRoute)
