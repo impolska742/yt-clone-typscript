@@ -1,8 +1,8 @@
 import { getModelForClass, prop, Ref } from '@typegoose/typegoose'
-import { customAlphabet } from 'nanoid'
+import * as nanoID from 'nanoid'
 import { User } from '../user/user.model'
 
-const nanoid = customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 10)
+const nanoid = nanoID.customAlphabet('1234567890abcdefghijklmnopqrstuvwxyz', 10)
 
 export class Video {
     @prop()
@@ -18,7 +18,7 @@ export class Video {
     public owner: Ref<User>
 
     @prop({ unique: true, default: () => nanoid() })
-    public videId: string
+    public videoId: string
 
     @prop({ default: false })
     public published: boolean
