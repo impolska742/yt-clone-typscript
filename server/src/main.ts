@@ -40,6 +40,12 @@ const server = app.listen(PORT, async () => {
     logger.info(`Server is running on http://localhost:${PORT}`)
 })
 
+// Hit server
+
+app.get('/', (req, res) => {
+    res.send('<h1>Hello World!</h1>')
+})
+
 // Handling Shutdown logs
 
 const signals = ['SIGTERM', 'SIGINT']
