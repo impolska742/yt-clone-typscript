@@ -14,7 +14,13 @@ function getPath({
     videoId: Video['videoId']
     extension: Video['extension']
 }) {
-    return `${process.cwd()}/videos/${videoId}.${extension}`
+    const dir: string = `${process.cwd()}/videos`
+
+    if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir)
+    }
+
+    return `${dir}/${videoId}.${extension}`
 }
 
 export async function uploadVideoHandler(req: Request, res: Response) {
