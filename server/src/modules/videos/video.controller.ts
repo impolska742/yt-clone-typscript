@@ -24,6 +24,7 @@ export async function uploadVideoHandler(req: Request, res: Response) {
 
     bb.on('file', async (_, file, info) => {
         if (!MIME_TYPES.includes(info.mimeType)) {
+            await video.delete()
             return res.status(StatusCodes.BAD_REQUEST).send('Invalid file type')
         }
 
