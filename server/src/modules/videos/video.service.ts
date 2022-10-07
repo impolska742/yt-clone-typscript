@@ -7,3 +7,9 @@ export function createVideo(owner: Video['owner']) {
 export function findVideo(videoId: Video['videoId']) {
     return VideoModel.findOne({ videoId })
 }
+
+export function findVideos() {
+    return VideoModel.find({
+        published: true,
+    })
+}
