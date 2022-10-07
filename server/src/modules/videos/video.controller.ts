@@ -80,7 +80,7 @@ export async function updateVideoHandler(
         return res.status(StatusCodes.NOT_FOUND).send('Video not found')
     }
 
-    if (video.owner?.toString() !== userId) {
+    if (String(video.owner) !== String(userId)) {
         return res.status(StatusCodes.UNAUTHORIZED).send('Unauthorized')
     }
 
