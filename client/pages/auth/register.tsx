@@ -43,6 +43,21 @@ const RegisterPage = () => {
                 title: 'Success',
                 message: 'Account created successfully',
                 loading: false,
+                styles: (theme) => ({
+                    root: {
+                        backgroundColor: theme.colors.teal[6],
+                        borderColor: theme.colors.teal[6],
+
+                        '&::before': { backgroundColor: theme.white },
+                    },
+
+                    title: { color: theme.white },
+                    description: { color: theme.white },
+                    closeButton: {
+                        color: theme.white,
+                        '&:hover': { backgroundColor: theme.colors.teal[9] },
+                    },
+                }),
             })
         },
         onError: () => {
@@ -51,6 +66,21 @@ const RegisterPage = () => {
                 title: 'Error',
                 message: 'Could not create account',
                 loading: false,
+                styles: (theme) => ({
+                    root: {
+                        backgroundColor: theme.colors.red[6],
+                        borderColor: theme.colors.red[6],
+
+                        '&::before': { backgroundColor: theme.white },
+                    },
+
+                    title: { color: theme.white },
+                    description: { color: theme.white },
+                    closeButton: {
+                        color: theme.white,
+                        '&:hover': { backgroundColor: theme.colors.red[9] },
+                    },
+                }),
             })
         },
     })
