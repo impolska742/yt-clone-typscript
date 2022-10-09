@@ -12,10 +12,13 @@ import { showNotification, updateNotification } from '@mantine/notifications'
 import { IconCheck, IconX } from '@tabler/icons'
 import { AxiosError } from 'axios'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
 import { registerUser } from '../../api'
 
 const RegisterPage = () => {
+    const router = useRouter()
+
     const form = useForm({
         initialValues: {
             email: '',
@@ -62,6 +65,8 @@ const RegisterPage = () => {
                     },
                 }),
             })
+
+            router.push('/auth/login')
         },
         onError: () => {
             updateNotification({
