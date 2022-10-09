@@ -9,6 +9,7 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { showNotification, updateNotification } from '@mantine/notifications'
+import { IconCheck, IconX } from '@tabler/icons'
 import { AxiosError } from 'axios'
 import Head from 'next/head'
 import { useMutation } from 'react-query'
@@ -43,6 +44,8 @@ const RegisterPage = () => {
                 title: 'Success',
                 message: 'Account created successfully',
                 loading: false,
+                color: 'teal',
+                icon: <IconCheck />,
                 styles: (theme) => ({
                     root: {
                         backgroundColor: theme.colors.teal[6],
@@ -66,6 +69,8 @@ const RegisterPage = () => {
                 title: 'Error',
                 message: 'Could not create account',
                 loading: false,
+                color: 'red',
+                icon: <IconX />,
                 styles: (theme) => ({
                     root: {
                         backgroundColor: theme.colors.red[6],
