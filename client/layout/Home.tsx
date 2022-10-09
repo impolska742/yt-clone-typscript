@@ -7,7 +7,7 @@ import { useMe } from '../context/me'
 import { VideoContextProvider } from '../context/videos'
 
 const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
-    const { user, refetch } = useMe()
+    const { user } = useMe()
     return (
         <VideoContextProvider>
             <AppShell
