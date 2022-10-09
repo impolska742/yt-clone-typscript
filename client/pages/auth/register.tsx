@@ -9,7 +9,6 @@ import {
 } from '@mantine/core'
 import { useForm } from '@mantine/form'
 import { showNotification, updateNotification } from '@mantine/notifications'
-import { IconCheck, IconX } from '@tabler/icons'
 import { AxiosError } from 'axios'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
