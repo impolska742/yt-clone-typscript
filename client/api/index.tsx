@@ -67,3 +67,7 @@ export async function updateVideo({
         withCredentials: true,
     })
 }
+
+export async function getVideos() {
+    return axios.get(videoBase).then((res) => res.data)
+}

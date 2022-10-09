@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import UploadVideo from '../components/UploadVideo'
 import { useMe } from '../context/me'
+import { VideoContextProvider } from '../context/videos'
 
 const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
     const { user, refetch } = useMe()
@@ -48,7 +49,7 @@ const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
                 </Header>
             }
         >
-            {children}
+            <VideoContextProvider>{children}</VideoContextProvider>
         </AppShell>
     )
 }
