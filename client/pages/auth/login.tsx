@@ -23,8 +23,6 @@ const LoginPage = () => {
         initialValues: {
             email: '',
             password: '',
-            confirmPassword: '',
-            username: '',
         },
     })
 
@@ -35,7 +33,7 @@ const LoginPage = () => {
     >(loginUser, {
         onMutate: () => {
             showNotification({
-                id: 'register',
+                id: 'login',
                 title: 'Creating account',
                 message: 'Please wait ...',
                 loading: true,
@@ -43,54 +41,19 @@ const LoginPage = () => {
         },
         onSuccess: () => {
             updateNotification({
-                id: 'register',
+                id: 'login',
                 title: 'Success',
                 message: 'Account created successfully',
                 loading: false,
                 color: 'teal',
-                icon: <IconCheck />,
-                styles: (theme) => ({
-                    root: {
-                        backgroundColor: theme.colors.teal[6],
-                        borderColor: theme.colors.teal[6],
-
-                        '&::before': { backgroundColor: theme.white },
-                    },
-
-                    title: { color: theme.white },
-                    description: { color: theme.white },
-                    closeButton: {
-                        color: theme.white,
-                        '&:hover': { backgroundColor: theme.colors.teal[9] },
-                    },
-                }),
             })
-
-            router.push('/auth/login')
         },
         onError: () => {
             updateNotification({
-                id: 'register',
+                id: 'login',
                 title: 'Error',
                 message: 'Could not create account',
                 loading: false,
-                color: 'red',
-                icon: <IconX />,
-                styles: (theme) => ({
-                    root: {
-                        backgroundColor: theme.colors.red[6],
-                        borderColor: theme.colors.red[6],
-
-                        '&::before': { backgroundColor: theme.white },
-                    },
-
-                    title: { color: theme.white },
-                    description: { color: theme.white },
-                    closeButton: {
-                        color: theme.white,
-                        '&:hover': { backgroundColor: theme.colors.red[9] },
-                    },
-                }),
             })
         },
     })
@@ -98,11 +61,11 @@ const LoginPage = () => {
     return (
         <>
             <Head>
-                <title>Register User</title>
+                <title>Login User</title>
             </Head>
 
             <Container>
-                <Title>Register</Title>
+                <Title>Login</Title>
                 <Paper shadow="md" p={30} mt={30} radius={30} withBorder={true}>
                     <form
                         onSubmit={form.onSubmit((values) =>
@@ -117,25 +80,15 @@ const LoginPage = () => {
                                 required={true}
                                 {...form.getInputProps('email')}
                             />
-                            <TextInput
-                                label="Username"
-                                placeholder="coolname123"
-                                required={true}
-                                {...form.getInputProps('username')}
-                            />
+
                             <PasswordInput
                                 label="Password"
                                 placeholder="Your strong password"
                                 required={true}
                                 {...form.getInputProps('password')}
                             />
-                            <PasswordInput
-                                label="Confirm Password"
-                                placeholder="Your strong password"
-                                required={true}
-                                {...form.getInputProps('confirmPassword')}
-                            />
-                            <Button type="submit">Register</Button>
+
+                            <Button type="submit">Login</Button>
                         </Stack>
                     </form>
                 </Paper>
