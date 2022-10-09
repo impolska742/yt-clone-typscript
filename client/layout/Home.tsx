@@ -9,48 +9,50 @@ import { VideoContextProvider } from '../context/videos'
 const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
     const { user, refetch } = useMe()
     return (
-        <AppShell
-            padding="md"
-            navbar={
-                <Navbar width={{ base: 300 }} height={500} p="xs">
-                    Side Item
-                </Navbar>
-            }
-            header={
-                <Header height={60} p="xs">
-                    <Box sx={() => ({ display: 'flex' })}>
-                        <Box sx={() => ({ flex: '1' })}>
-                            <Image
-                                src="/logo.png"
-                                alt="logo"
-                                width="100px"
-                                height="40px"
-                            />
+        <VideoContextProvider>
+            <AppShell
+                padding="md"
+                navbar={
+                    <Navbar width={{ base: 300 }} height={500} p="xs">
+                        Side Item
+                    </Navbar>
+                }
+                header={
+                    <Header height={60} p="xs">
+                        <Box sx={() => ({ display: 'flex' })}>
+                            <Box sx={() => ({ flex: '1' })}>
+                                <Image
+                                    src="/logo.png"
+                                    alt="logo"
+                                    width="100px"
+                                    height="40px"
+                                />
+                            </Box>
+
+                            {!user ? (
+                                <>
+                                    <Link href="/auth/login" passHref>
+                                        <Anchor ml="lg" mr="lg">
+                                            Login
+                                        </Anchor>
+                                    </Link>
+
+                                    <Link href="/auth/register" passHref>
+                                        <Anchor ml="lg" mr="lg">
+                                            Register
+                                        </Anchor>
+                                    </Link>
+                                </>
+                            ) : (
+                                <UploadVideo />
+                            )}
                         </Box>
-
-                        {!user ? (
-                            <>
-                                <Link href="/auth/login" passHref>
-                                    <Anchor ml="lg" mr="lg">
-                                        Login
-                                    </Anchor>
-                                </Link>
-
-                                <Link href="/auth/register" passHref>
-                                    <Anchor ml="lg" mr="lg">
-                                        Register
-                                    </Anchor>
-                                </Link>
-                            </>
-                        ) : (
-                            <UploadVideo />
-                        )}
-                    </Box>
-                </Header>
-            }
-        >
-            <VideoContextProvider>{children}</VideoContextProvider>
-        </AppShell>
+                    </Header>
+                }
+            >
+                {children}
+            </AppShell>
+        </VideoContextProvider>
     )
 }
 
