@@ -6,6 +6,7 @@ import { NextPage } from 'next'
 import { ReactElement, ReactNode } from 'react'
 import { AppProps } from 'next/app'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { MeContextProvider } from '../context/me'
 
 type NextPageWithLayout = NextPage & {
     getLayout?: (page: ReactElement) => ReactNode
@@ -39,11 +40,13 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
             >
                 <NotificationsProvider>
                     <QueryClientProvider client={queryClient}>
-                        {getLayout(
-                            <main>
-                                <Component {...pageProps} />
-                            </main>,
-                        )}
+                        <MeContextProvider>
+                            {getLayout(
+                                <main>
+                                    <Component {...pageProps} />
+                                </main>,
+                            )}
+                        </MeContextProvider>
                     </QueryClientProvider>
                 </NotificationsProvider>
             </MantineProvider>
