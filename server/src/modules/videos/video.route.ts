@@ -10,8 +10,8 @@ import {
 const router = express.Router()
 
 router.post('/', requireUser, uploadVideoHandler)
-router.patch('/:videoId', requireUser, updateVideoHandler)
 router.get('/', getPublishedVideos)
+router.patch('/:videoId', requireUser, updateVideoHandler)
 router.get('/:videoId', streamVideoHandler)
 
 export default router
