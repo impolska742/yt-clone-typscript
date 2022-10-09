@@ -30,11 +30,15 @@ const HomePageLayout = ({ children }: { children: React.ReactNode }) => {
                         {!user ? (
                             <>
                                 <Link href="/auth/login" passHref>
-                                    <Anchor>Login</Anchor>
+                                    <Anchor ml="lg" mr="lg">
+                                        Login
+                                    </Anchor>
                                 </Link>
 
                                 <Link href="/auth/register" passHref>
-                                    <Anchor>Register</Anchor>
+                                    <Anchor ml="lg" mr="lg">
+                                        Register
+                                    </Anchor>
                                 </Link>
                             </>
                         ) : (

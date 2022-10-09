@@ -3,6 +3,7 @@ import axios from 'axios'
 const base = process.env.NEXT_PUBLIC_API_ENDPOINT
 const userBase = `${base}/api/users`
 const authBase = `${base}/api/auth`
+const videoBase = `${base}/api/videos`
 
 export async function registerUser(payload: {
     username: string
@@ -31,4 +32,38 @@ export async function getMe() {
     } catch {
         return null
     }
+}
+
+export async function uploadVideo({
+    formData,
+    config,
+}: {
+    formData: FormData
+    config: {
+        onUploadProgress: (progressEvent: any) => void
+    }
+}) {
+    return axios
+        .post(videoBase, formData, {
+            withCredentials: true,
+            ...config,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        })
+        .then((res) => res.data)
+}
+
+export async function updateVideo({
+    videoId,
+    ...payload
+}: {
+    videoId: string
+    title: string
+    description: string
+    published: boolean
+}) {
+    return axios.patch(`${videoBase}/${videoId}`, payload, {
+        withCredentials: true,
+    })
 }
