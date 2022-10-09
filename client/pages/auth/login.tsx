@@ -11,10 +11,13 @@ import { useForm } from '@mantine/form'
 import { showNotification, updateNotification } from '@mantine/notifications'
 import { AxiosError } from 'axios'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useMutation } from 'react-query'
 import { loginUser } from '../../api'
 
 const LoginPage = () => {
+    const router = useRouter()
+
     const form = useForm({
         initialValues: {
             email: '',
@@ -30,7 +33,7 @@ const LoginPage = () => {
         onMutate: () => {
             showNotification({
                 id: 'login',
-                title: 'Creating account',
+                title: 'Login user',
                 message: 'Please wait ...',
                 loading: true,
             })
@@ -39,16 +42,18 @@ const LoginPage = () => {
             updateNotification({
                 id: 'login',
                 title: 'Success',
-                message: 'Account created successfully',
+                message: 'User logged in successfully',
                 loading: false,
                 color: 'teal',
             })
+
+            router.push('/')
         },
         onError: () => {
             updateNotification({
                 id: 'login',
                 title: 'Error',
-                message: 'Could not create account',
+                message: 'Could not login ',
                 loading: false,
             })
         },
