@@ -15,3 +15,4 @@
 2. yarn add @mantine/hooks @mantine/core @mantine/next react-query axios @mantine/notifications tabler-icons-react @mantine/dropzone
 
 3. Setup Mantine <https://mantine.dev/theming/next/>
+
